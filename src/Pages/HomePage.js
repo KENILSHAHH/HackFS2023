@@ -7,7 +7,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '@polybase/react';
 import { useIsAuthenticated } from '@polybase/react';
 // import { ConnectKitButton } from 'connectkit';
-import { useAccount, useSignMessage } from 'wagmi';
+
 
 import { getAccessToken, getMessage } from '@huddle01/auth';
 import { useHuddle01 } from '@huddle01/react';
