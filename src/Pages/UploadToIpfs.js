@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { create } from 'ipfs-http-client';
+
+import { Buffer } from 'buffer';
+
 import { useState } from 'react';
 const projectId = '2MCR81xh4vPrqI0y4SQtv09NTnb';
 const projectSecret = '1db9edb0249dd358814ccfd8f9dfc26d';
@@ -17,13 +20,13 @@ const client = create({
   },
 });
 function UploadToIpfs() {
-    const[fileUrl, setFileUrl] = useState("")
+  const [fileUrl, setFileUrl] = useState('');
   async function onChange(e) {
     const file = e.target.files[0];
     try {
       const added = await client.add(file);
       const url = `https://polybase.infura-ipfs.io/ipfs/${added.path}`;
-     setFileUrl(url);
+      setFileUrl(url);
     } catch (error) {
       console.log('Error uploading file: ', error);
     }
@@ -34,13 +37,17 @@ function UploadToIpfs() {
 
       <input
         type="file"
+        accept="video/*"
         onChange={onChange}
       />
       {fileUrl && (
-        <img
-          src={fileUrl}
-          width="600px"
-        />
+        <video controls>
+          <source
+            src={fileUrl}
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
       )}
       <p>{fileUrl}</p>
     </div>
